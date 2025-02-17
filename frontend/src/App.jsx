@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,6 +9,7 @@ import "./assets/styles/App.css";
 const socket = io("/");
 
 function App() {
+  const messagesEndRef = useRef(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
@@ -18,6 +19,15 @@ function App() {
       socket.off("message", receiveMessage);
     };
   }, []);
+
+  // Ejecutar scroll cuando se actualizan los mensajes
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const receiveMessage = (message) => {
     setMessages((prevMessages) => [...prevMessages, message]);
@@ -44,7 +54,6 @@ function App() {
           <h1>💬 chat app</h1>
         </Col>
       </Row>
-
       <Row className="messages-container">
         <Col>
           <ul className="messages-list">
@@ -69,10 +78,11 @@ function App() {
                 </div>
               </li>
             ))}
+            {/* ... mapeo de mensajes */}
+            <div ref={messagesEndRef} />
           </ul>
         </Col>
       </Row>
-
       <Row className="message-input-container">
         <Col>
           <Form onSubmit={handleSubmit} className="message-form">
