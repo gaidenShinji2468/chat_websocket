@@ -1,0 +1,30 @@
+{
+  "name": "chat_websocket",
+  "version": "1.0.0",
+  "description": "Chat con Websockets, Node y React.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js --ignore frontend/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gaidenShinji2468/chat_websocket.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gaidenShinji2468/chat_websocket/issues"
+  },
+  "homepage": "https://github.com/gaidenShinji2468/chat_websocket#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
